@@ -25,12 +25,12 @@ Let's say, we have a simple system with a frontend and a single backend service.
 ![Simple system](./docs/Simple system.png)
 
 Here, applying the Testing Pyramid is quite comfy:
-* The modules are isolated well, so we can test them separately with unit tests. E.g.: the Domain Layer. With API mocking, the FE can also be tested separately.
+* The modules are isolated well, so we can test them separately with unit tests. E.g.: the Domain Layer. or with API mocking, the FE can also be tested separately.
 * The integration tests can cover the interactions between the modules. E.g.: the Repository Layer and the Domain Layer.
   * We can also create higher tests, by using e.g.: in-memory db and run a few procedures with all the modules together, from top-to-bottom.\
-  Note, this is a good place for the BDD tests, however, these APIs could support many more scenarios than the UI.
+  Note, this is a good place for the gherkin tests, however, these APIs could support many more scenarios than the UI.
 * E2E, or UI tests can cover the whole system, including the UI.\
-This is very close to the users, hence the reason we usually use use BDD here. User Acceptance Tests are also a good fit here.\
+This is very close to the users, hence the reason we usually use use gherkin here. Implementing here the User Acceptance Tests are also a good fit, not to forget about BDD.\
 We can also use a prepared/dedicated DB for these tests, so we can use a whole **S**ystem **U**nder **T**est.
 
 ## The system grows, and the team splits into Frontend and Backend teams
