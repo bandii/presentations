@@ -10,14 +10,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a8c9f957-a1ad-4f63-add3-1717d79d3e34" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Testing.sln" afterDir="false" />
+    <list default="true" id="a8c9f957-a1ad-4f63-add3-1717d79d3e34" name="Changes" comment="- Initial commit, based on https://github.com/pact-foundation/pact-net/tree/master/samples/OrdersApi">
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Testing/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Testing/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,6 +40,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ea4f8b3c246880429454c5f6c4766c538fd9ff1960f3dae455fb464d246610b5/InteropVerifierProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5714fbbadc66d1699b18a55f41dc81597c31111f9e278d3f7e951ddd4ab/PactVerifierSource.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -140,14 +149,26 @@
       <updated>1701788736186</updated>
       <workItem from="1707310969577" duration="2854000" />
       <workItem from="1707405926527" duration="2593000" />
-      <workItem from="1708673784020" duration="465000" />
+      <workItem from="1708673784020" duration="6061000" />
     </task>
+    <task id="LOCAL-00001" summary="- Initial commit, based on https://github.com/pact-foundation/pact-net/tree/master/samples/OrdersApi">
+      <option name="closed" value="true" />
+      <created>1708674520723</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708674520723</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="- Initial commit, based on https://github.com/pact-foundation/pact-net/tree/master/samples/OrdersApi" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Initial commit, based on https://github.com/pact-foundation/pact-net/tree/master/samples/OrdersApi" />
   </component>
 </project>
