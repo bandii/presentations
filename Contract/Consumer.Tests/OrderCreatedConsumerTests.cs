@@ -10,6 +10,9 @@ using Match = PactNet.Matchers.Match;
 
 namespace Consumer.Tests
 {
+    /// <summary>
+    /// Tests messaging
+    /// </summary>
     public class OrderCreatedConsumerTests
     {
         private readonly OrderCreatedConsumer consumer;
@@ -35,7 +38,8 @@ namespace Consumer.Tests
                 }
             };
 
-            this.pact = Pact.V4("Fulfilment API", "Orders messaging", config).WithMessageInteractions();
+            this.pact = Pact.V4("Fulfilment Messaging", "Orders messaging", config)
+                            .WithMessageInteractions();
         }
 
         [Fact]

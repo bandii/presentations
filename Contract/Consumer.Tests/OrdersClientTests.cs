@@ -17,14 +17,17 @@ using Match = PactNet.Matchers.Match;
 
 namespace Consumer.Tests
 {
+    /// <summary>
+    /// Tests a httpClient communication.
+    /// </summary>
     public class OrdersClientTests
     {
         private readonly IPactBuilderV4 pact;
-        private readonly Mock<IHttpClientFactory> mockFactory;
+        private readonly Mock<IHttpClientFactory> mockHttpClientFactory;
 
         public OrdersClientTests(ITestOutputHelper output)
         {
-            this.mockFactory = new Mock<IHttpClientFactory>();
+            this.mockHttpClientFactory = new Mock<IHttpClientFactory>();
 
             var config = new PactConfig
             {
@@ -41,12 +44,14 @@ namespace Consumer.Tests
                 LogLevel = PactLogLevel.Debug
             };
 
-            this.pact = Pact.V4("Fulfilment API", "Orders API", config).WithHttpInteractions();
+            this.pact = Pact.V4("Fulfilment API", "Orders API", config)
+                            .WithHttpInteractions();
         }
 
         [Fact]
         public async Task GetOrderAsync_WhenCalled_ReturnsOrder()
         {
+            // Given I request an order by id
             var expected = new OrderDto(1, OrderStatus.Pending, new DateTimeOffset(2023, 6, 28, 12, 13, 14, TimeSpan.FromHours(1)));
 
             this.pact
@@ -54,6 +59,7 @@ namespace Consumer.Tests
                     .Given("an order with ID {id} exists", new Dictionary<string, string> { ["id"] = "1" })
                     .WithRequest(HttpMethod.Get, "/api/orders/1")
                     .WithHeader("Accept", "application/json")
+                // and the API responds with the order
                 .WillRespond()
                     .WithStatus(HttpStatusCode.OK)
                     .WithJsonBody(new
@@ -63,23 +69,26 @@ namespace Consumer.Tests
                         Date = Match.Type(expected.Date.ToString("O"))
                     });
 
+            // When verifying..
             await this.pact.VerifyAsync(async ctx =>
             {
-                this.mockFactory
+                this.mockHttpClientFactory
                     .Setup(f => f.CreateClient("Orders"))
                     .Returns(() => new HttpClient
                     {
-                        BaseAddress = ctx.MockServerUri,
+                        BaseAddress = ctx.MockServerUri, // The mock server URI provided by pact's context
                         DefaultRequestHeaders =
                         {
                             Accept = { MediaTypeWithQualityHeaderValue.Parse("application/json") }
                         }
                     });
 
-                var client = new OrdersClient(this.mockFactory.Object);
+                var client = new OrdersClient(this.mockHttpClientFactory.Object);
 
+                // .. the API call
                 OrderDto order = await client.GetOrderAsync(1);
 
+                // Then the order should be fetched
                 order.Should().Be(expected);
             });
         }
@@ -96,7 +105,7 @@ namespace Consumer.Tests
 
             await this.pact.VerifyAsync(async ctx =>
             {
-                this.mockFactory
+                this.mockHttpClientFactory
                     .Setup(f => f.CreateClient("Orders"))
                     .Returns(() => new HttpClient
                     {
@@ -107,7 +116,7 @@ namespace Consumer.Tests
                         }
                     });
 
-                var client = new OrdersClient(this.mockFactory.Object);
+                var client = new OrdersClient(this.mockHttpClientFactory.Object);
 
                 Func<Task> action = () => client.GetOrderAsync(404);
 
@@ -129,14 +138,14 @@ namespace Consumer.Tests
 
             await this.pact.VerifyAsync(async ctx =>
             {
-                this.mockFactory
+                this.mockHttpClientFactory
                     .Setup(f => f.CreateClient("Orders"))
                     .Returns(() => new HttpClient
                     {
                         BaseAddress = ctx.MockServerUri
                     });
 
-                var client = new OrdersClient(this.mockFactory.Object);
+                var client = new OrdersClient(this.mockHttpClientFactory.Object);
 
                 await client.UpdateOrderAsync(1, OrderStatus.Fulfilling);
             });

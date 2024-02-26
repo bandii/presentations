@@ -29,6 +29,10 @@ namespace Provider.Tests
 
         public ProviderTests(ITestOutputHelper output)
         {
+            /* Note: You can't use the Microsoft.AspNetCore.Mvc.Testing library to host your API for provider tests.
+             If your tests are using TestServer or WebApplicationFactory then these are running the API
+             with a special in-memory test server instead of running on a real TCP socket.
+            */
             this.server = Host.CreateDefaultBuilder()
                               .ConfigureWebHostDefaults(webBuilder =>
                               {
@@ -56,7 +60,7 @@ namespace Provider.Tests
         }
 
         [Fact]
-        public void Verify()
+        public void Verify_API()
         {
             string pactPath = Path.Combine("..",
                                            "..",
@@ -64,12 +68,31 @@ namespace Provider.Tests
                                            "..",
                                            "Consumer.Tests",
                                            "pacts",
-                                           "Fulfilment API-Orders messaging.json");
+                                           "Fulfilment API-Orders API.json");
+
+            this.verifier
+                .WithHttpEndpoint(ProviderUri)
+                .WithFileSource(new FileInfo(pactPath))
+                .WithProviderStateUrl(new Uri(ProviderUri, "/provider-states"))
+                .Verify();
+        }
+
+        [Fact]
+        public void Verify_Messaging()
+        {
+            string pactPath = Path.Combine("..",
+                                           "..",
+                                           "..",
+                                           "..",
+                                           "Consumer.Tests",
+                                           "pacts",
+                                           "Fulfilment Messaging-Orders messaging.json");
 
             this.verifier
                 .WithHttpEndpoint(ProviderUri)
                 .WithMessages(scenarios =>
                 {
+                    // You need to use the same description as the consumer's..
                     scenarios.Add("an event indicating that an order has been created",
                                   () => new OrderCreatedEvent(2));
                 }, Options)

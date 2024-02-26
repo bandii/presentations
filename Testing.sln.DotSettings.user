@@ -6,6 +6,9 @@
   &lt;Or&gt;&#xD;
     &lt;Project Location="C:\repo\other\Testing\Testing\Contract\Provider.Tests" Presentation="&amp;lt;Contract&amp;gt;\&amp;lt;Provider.Tests&amp;gt;" /&gt;&#xD;
     &lt;ProjectFile&gt;055BB08F-6549-45CB-8302-E40362D440E3/f:OrderCreatedConsumerTests.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::055BB08F-6549-45CB-8302-E40362D440E3::net8.0::Consumer.Tests.OrdersClientTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>
