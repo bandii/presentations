@@ -43,7 +43,7 @@ namespace Provider.Tests
 
             this.server.Start();
             
-            this.verifier = new PactVerifier("Orders API", new PactVerifierConfig
+            this.verifier = new PactVerifier("Orders_API", new PactVerifierConfig
                                                            {
                                                                LogLevel = PactLogLevel.Debug,
                                                                Outputters = new List<IOutput>
@@ -68,15 +68,17 @@ namespace Provider.Tests
                                            "..",
                                            "Consumer.Tests",
                                            "pacts",
-                                           "Fulfilment API-Orders API.json");
+                                           "Fulfilment_API-Orders_API.json");
 
             this.verifier
                 .WithHttpEndpoint(ProviderUri)
-                .WithFileSource(new FileInfo(pactPath))
+                .WithPactBrokerSource(new Uri("http://localhost:9292"), options => options.PublishResults("1.0.0")) // TODO: dynamically set version
+                // TODO: load from file .WithFileSource(new FileInfo(pactPath))
                 .WithProviderStateUrl(new Uri(ProviderUri, "/provider-states"))
                 .Verify();
         }
-
+        
+        // Ignore these tests for now
         [Fact]
         public void Verify_Messaging()
         {
@@ -86,7 +88,7 @@ namespace Provider.Tests
                                            "..",
                                            "Consumer.Tests",
                                            "pacts",
-                                           "Fulfilment Messaging-Orders messaging.json");
+                                           "Fulfilment_Messaging-Orders_messaging.json");
 
             this.verifier
                 .WithHttpEndpoint(ProviderUri)

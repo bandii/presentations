@@ -38,7 +38,7 @@ namespace Consumer.Tests
                 }
             };
 
-            this.pact = Pact.V4("Fulfilment Messaging", "Orders messaging", config)
+            this.pact = Pact.V4("Fulfilment_Messaging", "Orders_messaging", config)
                             .WithMessageInteractions();
         }
 

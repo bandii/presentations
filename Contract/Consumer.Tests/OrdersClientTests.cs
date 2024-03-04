@@ -44,7 +44,7 @@ namespace Consumer.Tests
                 LogLevel = PactLogLevel.Debug
             };
 
-            this.pact = Pact.V4("Fulfilment API", "Orders API", config)
+            this.pact = Pact.V4("Fulfilment_API", "Orders_API", config)
                             .WithHttpInteractions();
         }
 

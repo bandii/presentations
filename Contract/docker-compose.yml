@@ -32,18 +32,25 @@ services:
       # Ngnix config below makes the app accessible on ports 443 and 80, while the Ruby application itself runs on port 9292
       PACT_BROKER_BASE_URL: 'https://localhost http://localhost http://localhost:9292 http://pact-broker:9292 https://host.docker.internal http://host.docker.internal http://host.docker.internal:9292'
 
-  # Nginx is not necessary, but demonstrates how
-  # one might use a reverse proxy in front of the broker,
-  # and includes the use of a self-signed TLS certificate
-  nginx:
-    image: nginx:alpine
-    depends_on:
-      - pact-broker
+  # This command uploads the Consumer contracts to the Pact Broker.
+  # See for more samples: https://hub.docker.com/r/pactfoundation/pact-cli
+  # For troubleshooting:
+  #   * docker run --rm -v ${HOST_PACT_DIRECTORY}:/tmp/pacts alpine ls ./tmp/pacts/
+  publish_contracts:
+    image: pactfoundation/pact-cli:latest
     volumes:
-      - ./ssl/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./ssl:/etc/nginx/ssl
-    ports:
-      - "443:443"
-      - "80:80"
+      - ./Consumer.Tests/pacts:/tmp/pacts
+    environment:
+      PACT_BROKER_BASE_URL: http://pact-broker:9292
+    command: publish /tmp/pacts --consumer-app-version "1.0.0"
+
+  # Produces a matrix and an answer on, whether you can deploy the Orders_API.
+  # If so, then it means the Provider has been verified against all the consumers with a success.
+  can_i_publish:
+    image: pactfoundation/pact-cli:latest
+    environment:
+      PACT_BROKER_BASE_URL: http://pact-broker:9292
+    command: pact-broker can-i-deploy --pacticipant Orders_API --latest
+
 volumes:
   postgres-volume:

@@ -112,5 +112,6 @@ pact-broker can-i-deploy --pacticipant Foo --version 23 --to-environment product
 * [Pacts broker](https://docs.pact.io/pact_broker)
   * [Pactflow](https://pactflow.io/features/)
   * [Other approaches, like S3](https://docs.pact.io/getting_started/sharing_pacts#alternative-approaches)
-* [Can I Deploy](https://docs.pact.io/pact_broker/can_i_deploy)
+  * [Can I Deploy](https://docs.pact.io/pact_broker/can_i_deploy)
+  * [Pact CLI](https://hub.docker.com/r/pactfoundation/pact-cli)
 * [ISTQB Glossary](https://istqb-glossary.page/)
