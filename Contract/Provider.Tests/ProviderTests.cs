@@ -73,8 +73,8 @@ namespace Provider.Tests
 
             this.verifier
                 .WithHttpEndpoint(ProviderUri)
-                // TODO: load from file .WithPactBrokerSource(new Uri("http://localhost:9292"), options => options.PublishResults("1.0.0")) // TODO: dynamically set version
-                .WithFileSource(new FileInfo(pactPath))
+                .WithPactBrokerSource(new Uri("http://localhost:9292"), options => options.PublishResults("1.0.0")) // TODO: dynamically set version
+                // TODO: load from file -> .WithFileSource(new FileInfo(pactPath))
                 .WithProviderStateUrl(new Uri(ProviderUri, "/provider-states"))
                 .Verify();
         }
