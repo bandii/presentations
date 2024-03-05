@@ -71,9 +71,9 @@ A common way of implementing contract tests (and the way Pact does it) is to che
 to your test doubles return the same results as a call to the real application would.
 
 ## Check the sample project
-[Sample Consumer test project](./Contract/Consumer.Tests) and [Provider test project](./Contract/Provider.Tests)
+[Sample Consumer test project](./Contract/Consumer.Tests/OrdersClientTests.cs) and [Provider test project](./Contract/Provider.Tests/ProviderTests.cs)
 
-Note the [./Contract/Consumer.Tests/pacts](./Contract/Consumer.Tests/pacts) folder!
+Note the [./Contract/Consumer.Tests/pacts](./Contract/Consumer.Tests/pacts) folder, where the generated pacts are stored.
 
 ### Sharing Pacts
 The generated Pacts (Contracts) can be shared with other teams via:
@@ -106,9 +106,9 @@ pact-broker can-i-deploy --pacticipant Foo --version 23 --to-environment product
 * [Pact .NET](https://github.com/pact-foundation/pact-net/blob/master/README.md)
   * [Pact .NET Messaging](https://github.com/pact-foundation/pact-net/blob/09ee8189a3dba1c47a02e571e8872924b90caaa8/docs/messaging-pacts.md)
   * More samples
-    * https://github.com/pact-foundation/pact-net/tree/master/samples/OrdersApi
-    * https://github.com/pact-foundation/example-consumer-dotnet
-    * https://github.com/pact-foundation/example-provider-dotnet
+    * File-storage based samples -> https://github.com/pact-foundation/pact-net/tree/master/samples/OrdersApi
+    * Broker-based sample for consumer -> https://github.com/pact-foundation/example-consumer-dotnet
+    * Broker-based sample for provider -> https://github.com/pact-foundation/example-provider-dotnet
 * [Pacts broker](https://docs.pact.io/pact_broker)
   * [Pactflow](https://pactflow.io/features/)
   * [Other approaches, like S3](https://docs.pact.io/getting_started/sharing_pacts#alternative-approaches)

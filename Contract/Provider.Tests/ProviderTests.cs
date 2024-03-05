@@ -59,6 +59,7 @@ namespace Provider.Tests
             this.verifier.Dispose();
         }
 
+        // Take a look at this test
         [Fact]
         public void Verify_API()
         {
@@ -72,8 +73,8 @@ namespace Provider.Tests
 
             this.verifier
                 .WithHttpEndpoint(ProviderUri)
-                .WithPactBrokerSource(new Uri("http://localhost:9292"), options => options.PublishResults("1.0.0")) // TODO: dynamically set version
-                // TODO: load from file .WithFileSource(new FileInfo(pactPath))
+                // TODO: load from file .WithPactBrokerSource(new Uri("http://localhost:9292"), options => options.PublishResults("1.0.0")) // TODO: dynamically set version
+                .WithFileSource(new FileInfo(pactPath))
                 .WithProviderStateUrl(new Uri(ProviderUri, "/provider-states"))
                 .Verify();
         }

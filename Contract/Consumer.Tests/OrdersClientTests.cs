@@ -48,6 +48,7 @@ namespace Consumer.Tests
                             .WithHttpInteractions();
         }
 
+        // Take a look at this test
         [Fact]
         public async Task GetOrderAsync_WhenCalled_ReturnsOrder()
         {

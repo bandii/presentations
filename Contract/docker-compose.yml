@@ -38,6 +38,8 @@ services:
   #   * docker run --rm -v ${HOST_PACT_DIRECTORY}:/tmp/pacts alpine ls ./tmp/pacts/
   publish_contracts:
     image: pactfoundation/pact-cli:latest
+    depends_on:
+      - pact-broker
     volumes:
       - ./Consumer.Tests/pacts:/tmp/pacts
     environment:
@@ -48,6 +50,8 @@ services:
   # If so, then it means the Provider has been verified against all the consumers with a success.
   can_i_publish:
     image: pactfoundation/pact-cli:latest
+    depends_on:
+      - pact-broker
     environment:
       PACT_BROKER_BASE_URL: http://pact-broker:9292
     command: pact-broker can-i-deploy --pacticipant Orders_API --latest
